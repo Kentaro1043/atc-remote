@@ -22,7 +22,7 @@ jobs:
 
       - name: Setup variables
         id: variables
-        run: echo "::set-output name=TAG::${GITHUB_REF##*/}"
+        run: echo "TAG=${GITHUB_REF##*/}" >> $GITHUB_OUTPUT
 
       - name: Docker Setup QEMU
         uses: docker/setup-qemu-action@v2
