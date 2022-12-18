@@ -48,7 +48,8 @@ USER coder
 RUN mkdir -p /home/coder/.config/code-server \
 	&& mkdir -p /home/coder/.config/atcoder-cli-nodejs \
 	&& mkdir -p /home/coder/.local/share/online-judge-tools \
-	&& mkdir -p /home/coder/workspace
+	&& mkdir -p /home/coder/workspace \
+	&& touch /home/coder/.bashrc
 
 # Install extension "clangd"
 RUN code-server --install-extension llvm-vs-code-extensions.vscode-clangd
