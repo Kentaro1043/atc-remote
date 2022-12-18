@@ -1,4 +1,4 @@
-# atc-env-remote
+# atc-remote
 
 [code-server](https://github.com/coder/code-server)上で動作する[AtCoder](https://atcoder.jp/)用開発環境
 
@@ -13,7 +13,7 @@
 docker run の例:
 
 ```Shell
-docker run -d -e PASSWORD=password -p 8080:8080 -v ./home:/home/coder kentaro1043/atc-env-remote
+docker run -d -e PASSWORD=password -p 8080:8080 -v ./home:/home/coder kentaro1043/atc-remote
 ```
 
 docker compose の例:
@@ -23,7 +23,7 @@ version: "3"
 
 services:
     atc:
-        image: kentaro1043/atc-env-remote
+        image: kentaro1043/atc-remote
         restart: unless-stopped
         environment:
             - "PASSWORD=password"
