@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install code-server
-COPY ./install-code-server.sh /tmp/install-code-server.sh
+COPY install-code-server.sh /tmp/
 RUN chmod +x /tmp/install-code-server.sh \
 	&& /tmp/install-code-server.sh \
 	&& rm /tmp/install-code-server.sh
