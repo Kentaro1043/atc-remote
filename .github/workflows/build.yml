@@ -1,4 +1,4 @@
-name: ci
+name: build
 
 on:
   push:
@@ -38,6 +38,6 @@ jobs:
           platforms: linux/amd64,linux/arm64
           builder: ${{ steps.buildx.outputs.name }}
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/atc-env-remote:latest,${{ secrets.DOCKER_HUB_USERNAME }}/atc-env-remote:${{ steps.variables.outputs.TAG }}
-          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/atc-env-remote:buildcache
-          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/atc-env-remote:buildcache,mode=max
+          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/atc-remote:latest,${{ secrets.DOCKER_HUB_USERNAME }}/atc-remote:${{ steps.variables.outputs.TAG }}
+          cache-from: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/atc-remote:buildcache
+          cache-to: type=registry,ref=${{ secrets.DOCKER_HUB_USERNAME }}/atc-remote:buildcache,mode=max
