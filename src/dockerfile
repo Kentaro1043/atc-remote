@@ -3,6 +3,10 @@ FROM debian:bullseye-slim
 # Set Vairable
 ENV DEBIAN_FRONTEND=noninteractive
 ENV SHELL=/bin/bash
+ENV CODE_VERSION=4.9.1
+
+# DL4006
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 # Install dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -17,8 +21,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Install code-server
-SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-RUN curl -fsSL https://raw.githubusercontent.com/coder/code-server/v4.9.1/install.sh | sh
+COPY ./install-code-server.sh /tmp/install-code-server.sh
+RUN chmod +x /tmp/install-code-server.sh \
+	&& /tmp/install-code-server.sh \
+	&& rm /tmp/install-code-server.sh
 
 # Install Node.js
 # Ignore DL3008 because version cannot be specified
@@ -42,7 +48,8 @@ USER coder
 RUN mkdir -p /home/coder/.config/code-server \
 	&& mkdir -p /home/coder/.config/atcoder-cli-nodejs \
 	&& mkdir -p /home/coder/.local/share/online-judge-tools \
-	&& mkdir -p /home/coder/workspace
+	&& mkdir -p /home/coder/workspace \
+	&& touch /home/coder/.bashrc
 
 # Install extension "clangd"
 RUN code-server --install-extension llvm-vs-code-extensions.vscode-clangd
